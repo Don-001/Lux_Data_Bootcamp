@@ -1,0 +1,18 @@
+# This piece of code utilizes phton to access data from an API and give back data from it
+import requests
+
+# Make a GET request to the Random User API and retrieve data for 100 male users
+response = requests.get("https://randomuser.me/api/?results=100&gender=male")
+
+# Parse the response to extract the relevant information
+data = response.json()
+users = data["results"]
+top_100_male_users = []
+
+# Iterate through the list of users and add the top 100 male users to a new list
+for user in users:
+    if user["gender"] == "male":
+        top_100_male_users.append(user)
+
+for user in top_100_male_users:
+    print(user["name"]["first"], user["name"]["last"])
